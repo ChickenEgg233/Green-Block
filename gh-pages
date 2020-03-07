@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style>
+    *{margin: 0; }
+    #box{
+     height: 50px;
+     width: 50px;
+     background-color: green;
+     position: absolute;
+     transition:ease-out 1000ms;
+    }
+    img{
+        position: absolute;
+        height: 30px;
+        width: 30px;
+        
+    }
+</style>
+</head>
+<body>
+    <img id="tag" draggable="false" src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png" alt="marker">
+    <div id="box">
+    </div>
+    <span id="theY" style="position: sticky; float: right; padding: 10px;">Y:  0</span>
+    <span id="theX" style="position: sticky; float: right; padding: 10px;">X:  0</span>
+
+<script>
+    $("tag").hide();
+    var clicked = false;
+    $(document).mousedown(function(e){
+        clicked = true;
+        if (clicked==true){
+                $('#box').css('margin-left', e.clientX-25);
+                
+                $('#tag').css('margin-top', e.clientY-15);
+                $('#tag').css('margin-left', e.clientX-15);
+                $('#tag').slideDown(100);
+                var time = setInterval(gone,900);
+        }
+        if (clicked==true){
+                $('#box').css('margin-top', e.clientY-25);
+        }
+    })
+    function gone(){
+        $('#tag').fadeOut(300);
+    }
+    $('#box').mouseup(function(){
+        clicked = false;
+        
+    })  
+    $(document).mousemove(function(e){
+        $('#theX').html("X:"+e.clientX);
+        $('#theY').html("Y:"+e.clientY);
+    })
+</script>
+</body>
+</html>
